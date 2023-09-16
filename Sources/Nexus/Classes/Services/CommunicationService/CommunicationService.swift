@@ -1,9 +1,10 @@
+//
+// Nexus
+// Copyright © 2023 Space Code. All rights reserved.
+//
+
 import Combine
 import WatchConnectivity
-
-private extension String {
-    static let identifier = "identifier"
-}
 
 // MARK: - CommunicationService
 
@@ -46,7 +47,7 @@ public final class CommunicationService {
     }
 }
 
-// MARK: - ICommunicationService
+// MARK: ICommunicationService
 
 extension CommunicationService: ICommunicationService {
     public func configure() {
@@ -86,10 +87,14 @@ extension CommunicationService: ICommunicationService {
     }
 }
 
-// MARK: - WatchConnectivityServiceDelegate
+// MARK: WatchConnectivityServiceDelegate
 
 extension CommunicationService: WatchConnectivityServiceDelegate {
-    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    public func session(
+        _ session: WCSession,
+        activationDidCompleteWith activationState: WCSessionActivationState,
+        error: Error?
+    ) {
         delegate?.session(session, activationDidCompleteWith: activationState, error: error)
     }
 
@@ -98,7 +103,11 @@ extension CommunicationService: WatchConnectivityServiceDelegate {
         post(message: message)
     }
 
-    public func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+    public func session(
+        _ session: WCSession,
+        didReceiveMessage message: [String: Any],
+        replyHandler: @escaping ([String: Any]) -> Void
+    ) {
         delegate?.session(session, didReceiveMessage: message, replyHandler: replyHandler)
         post(message: message)
     }
@@ -112,4 +121,10 @@ extension CommunicationService: WatchConnectivityServiceDelegate {
             delegate?.sessionDidDeactivate(session)
         }
     #endif
+}
+
+// MARK: - Constants
+
+private extension String {
+    static let identifier = "identifier"
 }

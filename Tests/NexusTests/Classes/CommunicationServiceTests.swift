@@ -1,10 +1,17 @@
+//
+// Nexus
+// Copyright © 2023 Space Code. All rights reserved.
+//
+
 import Combine
-import XCTest
 @testable import Nexus
+import XCTest
 
 private extension String {
     static let identifier = "identifier"
 }
+
+// MARK: - CommunicationServiceTests
 
 final class CommunicationServiceTests: XCTestCase {
     // MARK: Properties
@@ -64,7 +71,7 @@ final class CommunicationServiceTests: XCTestCase {
         let receivedMessage = try XCTUnwrap(watchConnectivityServiceMock.invokedSendMessageParameters?.message)
         XCTAssertTrue(NSDictionary(dictionary: receivedMessage).isEqual(to: dict))
     }
-    
+
     func test_thatCommunicationServiceCallHandler_whenRecieveMessage() {
         // given
         var cancellable = Set<AnyCancellable>()
@@ -92,7 +99,7 @@ final class CommunicationServiceTests: XCTestCase {
 
         wait(for: [expectation], timeout: 0.5)
     }
-    
+
     // MARK: Private
 
     private func makeDictonary<T: Message>(for message: T) -> [String: Any] {
