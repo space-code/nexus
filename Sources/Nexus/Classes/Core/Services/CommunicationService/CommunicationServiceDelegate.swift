@@ -1,6 +1,13 @@
+//
+// Nexus
+// Copyright © 2023 Space Code. All rights reserved.
+//
+
+import Foundation
 import WatchConnectivity
 
-public protocol WatchConnectivityServiceDelegate: AnyObject {
+/// A delegate protocol that defines methods for receiving messages sent by a CommunicationService object.
+public protocol CommunicationServiceDelegate: AnyObject {
     #if os(iOS)
         /// Inherited from WCSessionDelegate.sessionDidBecomeInactive(_:).
         func sessionDidBecomeInactive(_ session: WCSession)
@@ -24,23 +31,4 @@ public protocol WatchConnectivityServiceDelegate: AnyObject {
         didReceiveMessage message: [String: Any],
         replyHandler: @escaping ([String: Any]) -> Void
     )
-}
-
-public extension WatchConnectivityServiceDelegate {
-    /// Inherited from WCSessionDelegate.session(_:didReceiveMessage:)
-    func session(_: WCSession, didReceiveMessage _: [String: Any]) {}
-
-    /// Inherited from WCSessionDelegate.session(_:activationDidCompleteWith:error:).
-    func session(
-        _: WCSession,
-        activationDidCompleteWith _: WCSessionActivationState,
-        error _: Error?
-    ) {}
-
-    /// Inherited from WCSessionDelegate.session(_:didReceiveMessage:replyHandler:).
-    func session(
-        _: WCSession,
-        didReceiveMessage _: [String: Any],
-        replyHandler _: @escaping ([String: Any]) -> Void
-    ) {}
 }

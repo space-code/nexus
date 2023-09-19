@@ -13,12 +13,10 @@ disabled_rules:
 opt_in_rules: # some rules are only opt-in
   - anyobject_protocol
   - array_init
-  - attributes
   - closure_body_length
   - closure_end_indentation
   - closure_spacing
   - collection_alignment
-  - conditional_returns_on_newline
   - contains_over_filter_count
   - contains_over_filter_is_empty
   - contains_over_first_not_nil
@@ -127,7 +125,6 @@ nesting:
     warning: 2
   statement_level:
     warning: 10
-
 
 type_name:
   max_length:

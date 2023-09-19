@@ -8,6 +8,7 @@
 <a href="https://developer.apple.com/swift"><img alt="Swift5.7" src="https://img.shields.io/badge/language-Swift5.7-orange.svg"/></a>
   <a href="https://github.com/space-code/concurrency"><img alt="CI" src="https://github.com/space-code/nexus/actions/workflows/ci.yml/badge.svg?branch=main"></a>
 <a href="https://github.com/apple/swift-package-manager" alt="Nexus on Swift Package Manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" /></a>
+<a href="https://codecov.io/gh/space-code/nexus"><img alt="CodeCov" src="https://codecov.io/github/space-code/nexus/graph/badge.svg?token=4MP7MPTQS5"></a>
 </p>
 
 ## Description
@@ -23,7 +24,7 @@ Nexus is a wrapper around `WatchConnectivity` that simplifies the interaction be
 
 ## Usage
 
-1. Define a message model, like this:
+1. Define a message model like this:
 ```swift
 import Nexus
 
@@ -51,7 +52,7 @@ communicationService.receiveMessage(TestMessage.self)
   .store(in: &disposables)
 ```
 
-3. Send a message to Apple Watch or iPhone
+3. Send a message to Apple Watch or iPhone:
 ```swift
 import Nexus
 
@@ -73,7 +74,7 @@ Once you have your Swift package set up, adding `nexus` as a dependency is as ea
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/space-code/nexus.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/space-code/nexus.git", .upToNextMajor(from: "2.0.0"))
 ]
 ```
 
