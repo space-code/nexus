@@ -8,26 +8,29 @@ import WatchConnectivity
 // MARK: - WatchConnectivityService
 
 public final class WatchConnectivityService: NSObject {
-    // MARK: Lifecycle
+    // MARK: Properties
 
-    public init(session: WCSession) {
-        self.session = session
-    }
-
-    // MARK: Public
+    private let sessionCompatibleProvider: ISessionCompatibleProvider
+    private let session: IWCSession
 
     public weak var delegate: WatchConnectivityServiceDelegate?
 
-    // MARK: Private
+    // MARK: Initialization
 
-    private let session: WCSession
+    public init(
+        session: IWCSession,
+        sessionCompatibleProvider: ISessionCompatibleProvider = SessionCompatibleProvider()
+    ) {
+        self.session = session
+        self.sessionCompatibleProvider = sessionCompatibleProvider
+    }
 }
 
 // MARK: IWatchConnectivityService
 
 extension WatchConnectivityService: IWatchConnectivityService {
     public var isSupported: Bool {
-        WCSession.isSupported()
+        sessionCompatibleProvider.isSupported
     }
 
     public func configure() {

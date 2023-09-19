@@ -5,7 +5,7 @@
 
 import Nexus
 
-struct MessageMock: Message {
+struct MessageStub: Message {
     static var identifier: String {
         "MessageMockIdentifier"
     }

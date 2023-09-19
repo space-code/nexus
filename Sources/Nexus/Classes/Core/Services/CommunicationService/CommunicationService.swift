@@ -9,31 +9,34 @@ import WatchConnectivity
 // MARK: - CommunicationService
 
 public final class CommunicationService {
-    // MARK: Lifecycle
+    // MARK: Properties
 
-    public init(watchConnectivityService: IWatchConnectivityService = WatchConnectivityService(session: .default)) {
-        self.watchConnectivityService = watchConnectivityService
-    }
-
-    // MARK: Public
+    private let watchConnectivityService: IWatchConnectivityService
+    private let notificationCenter: INotificationCenter
+    private let jsonDecoder: JSONDecoder
 
     public weak var delegate: CommunicationServiceDelegate?
 
-    // MARK: Private
+    // MARK: Lifecycle
 
-    private let watchConnectivityService: IWatchConnectivityService
-    private let notificationCenter = NotificationCenter.default
+    public init(
+        watchConnectivityService: IWatchConnectivityService = WatchConnectivityService(session: WCSession.default),
+        jsonDecoder: JSONDecoder = JSONDecoder(),
+        notificationCenter: INotificationCenter = NotificationCenter.default
+    ) {
+        self.watchConnectivityService = watchConnectivityService
+        self.jsonDecoder = jsonDecoder
+        self.notificationCenter = notificationCenter
+    }
 
     private func makeNotificationName(for identifier: String) -> Notification.Name {
-        Notification.Name("CommunicationService.\(identifier)")
+        Notification.Name("\(String.notificationName).\(identifier)")
     }
 
     private func post(message: [String: Any]) {
-        guard let identifier = message[.identifier] as? String else {
-            return
+        if let identifier = message[.identifier] as? String {
+            notificationCenter.post(name: makeNotificationName(for: identifier), object: message)
         }
-
-        notificationCenter.post(name: makeNotificationName(for: identifier), object: message)
     }
 
     private func makeDictonary<T: Message>(for message: T) -> [String: Any] {
@@ -80,7 +83,7 @@ extension CommunicationService: ICommunicationService {
             .receive(on: RunLoop.main)
             .tryCompactMap { $0.object as? [String: Any] }
             .tryMap { object in
-                try JSONDecoder().decode(type, from: JSONSerialization.data(withJSONObject: object))
+                try self.jsonDecoder.decode(type, from: JSONSerialization.data(withJSONObject: object))
             }
             .assertNoFailure()
             .eraseToAnyPublisher()
@@ -126,5 +129,6 @@ extension CommunicationService: WatchConnectivityServiceDelegate {
 // MARK: - Constants
 
 private extension String {
+    static let notificationName = "CommunicationService"
     static let identifier = "identifier"
 }

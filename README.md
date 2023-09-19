@@ -23,7 +23,7 @@ Nexus is a wrapper around `WatchConnectivity` that simplifies the interaction be
 
 ## Usage
 
-1. Define a message model, like this:
+1. Define a message model like this:
 ```swift
 import Nexus
 
@@ -51,7 +51,7 @@ communicationService.receiveMessage(TestMessage.self)
   .store(in: &disposables)
 ```
 
-3. Send a message to Apple Watch or iPhone
+3. Send a message to Apple Watch or iPhone:
 ```swift
 import Nexus
 
@@ -73,7 +73,7 @@ Once you have your Swift package set up, adding `nexus` as a dependency is as ea
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/space-code/nexus.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/space-code/nexus.git", .upToNextMajor(from: "2.0.0"))
 ]
 ```
 
