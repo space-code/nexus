@@ -1,3 +1,8 @@
+//
+// Nexus
+// Copyright © 2023 Space Code. All rights reserved.
+//
+
 import Nexus
 
 final class WatchConnectivityServiceMock: IWatchConnectivityService {
@@ -18,7 +23,7 @@ final class WatchConnectivityServiceMock: IWatchConnectivityService {
     var invokedGetDelegate = false
     var invokedGetDelegateCount = 0
     var stubbedDelegate: WatchConnectivityServiceDelegate?
-    
+
     var delegate: WatchConnectivityServiceDelegate? {
         get {
             invokedGetDelegate = true
@@ -35,20 +40,21 @@ final class WatchConnectivityServiceMock: IWatchConnectivityService {
 
     var invokedConfigure = false
     var invokedConfigureCount = 0
-    
+
     func configure() {
         invokedConfigure = true
         invokedConfigureCount += 1
     }
-    
+
     var invokedSendMessage = false
     var invokedSendMessageCount = 0
-    var invokedSendMessageParameters: (message: [String : Any], replyHandler: (([String : Any]) -> Void)?, errorHandler: ((Error) -> Void)?)?
-    var invokedSendMessageParametersList = [(message: [String : Any], replyHandler: (([String : Any]) -> Void)?, errorHandler: ((Error) -> Void)?)]()
-                        
+    var invokedSendMessageParameters: (message: [String: Any], replyHandler: (([String: Any]) -> Void)?, errorHandler: ((Error) -> Void)?)?
+    var invokedSendMessageParametersList =
+        [(message: [String: Any], replyHandler: (([String: Any]) -> Void)?, errorHandler: ((Error) -> Void)?)]()
+
     func sendMessage(
-        _ message: [String : Any],
-        replyHandler: (([String : Any]) -> Void)?,
+        _ message: [String: Any],
+        replyHandler: (([String: Any]) -> Void)?,
         errorHandler: ((Error) -> Void)?
     ) {
         invokedSendMessage = true

@@ -9,7 +9,7 @@ let package = Package(
         .iOS(.v13),
         .watchOS(.v7),
     ],
-    products: [.library(name: "Nexus", targets: ["Nexus"]),],
+    products: [.library(name: "Nexus", targets: ["Nexus"])],
     dependencies: [],
     targets: [
         .target(name: "Nexus", dependencies: []),
